@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="TANGO Co-Speech Gesture Video Reenactment with Hierarchical Audio-Motion Embedding and Diffusion Interpolation">
+  <meta name="keywords" content="Video Generation, Co-Speech Video Synthesis, Animation, VideoMotionGraph">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TANGO</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <!-- custom css file  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="icon" href="./assets/pac_man.svg">
+
+  <style>
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .video-pair {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-group {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .video-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    video {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .caption {
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .pair-title {
+      text-align: center;
+      margin-bottom: 5px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .figure-title {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+
+    .caption-line {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+      width: 95%;
+      max-width: 8000px;
+      margin: 0 auto;
+    }
+
+    /* Custom styles for the compositional section */
+    .compositional {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .compositional .image {
+      flex: 1;
+      max-width: 45%;
+    }
+
+    .compositional .image img,
+    .compositional .image video {
+      width: 100%;
+      height: auto;
+    }
+
+    .center-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 10px;
+    }
+
+    .center-controls .arrow {
+      margin-bottom: 10px;
+    }
+
+    .center-controls .audio-control {
+      margin-top: 10px;
+    }
+
+    .audio-btn {
+      font-size: 24px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    /* Adjust the headers inside .image */
+    .compositional .image .video_to_video_small_header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Adjust the thumbnails */
+    .compositional .image .thumbnails {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .compositional .image .thumbnails .thumbnail {
+      margin: 0 5px;
+    }
+
+    .compositional .image .thumbnails .thumbnail img {
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <!-- Removed 'is-max-desktop' from the container class -->
+      <div class="container head">
+        <div class="columns is-centered">
+          <div class="column has-text-centered head">
+            <br>
+
+            <h1 class="title is-2 publication-title">
+              TANGO: Co-Speech Gesture Video Reenactment with Hierarchical Audio-Motion Embedding and Diffusion Interpolation
+            </h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://h-liu1997.github.io/" target="_blank">Haiyang Liu</a><sup>1</sup>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://yangxingchao.github.io/" target="_blank">Xingchao Yang</a><sup>2</sup>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="" target="_blank">Tomoya Akiyama</a><sup>2</sup>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://sky24h.github.io/" target="_blank">Yuantian Huang</a><sup>2</sup>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="" target="_blank">Qiaoge Li</a>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://www.tut.ac.jp/english/university/faculty/cs/164.html" target="_blank">Shigeru Kuriyama</a><sup>2</sup>,&nbsp;
+              </span>
+              <span class="author-block">
+                <a href="https://taketomitakafumi.sakura.ne.jp/web/en/" target="_blank">Takafumi Taketomi</a><sup>2</sup>&nbsp;
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>The University of Tokyo</span>,
+              <span class="author-block"><sup>2</sup>CyberAgent AI Lab</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Demo Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/spaces/H-Liu1997/TANGO" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span>🤗&nbsp;Gradio</span>
+                  </a>
+                </span>
+
+                <!-- arXiv Link. -->
+                <span class="link-block">
+                  <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+
+                <!-- Data Link. -->
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+                </span>
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Include the missing section -->
+  <div class="white image_to_video">
+    <div class="tab_container">
+      <div class="tab tabimage single_image selected">
+        <div class="tab_text">Show-Oliver</div>
+        <div class="separator"></div>
+      </div>
+
+      <div class="tab tabimage pair_image">
+        <div class="tab_text">Youtube Video</div>
+        <div class="separator"></div>
+      </div>
+    </div>
+
+    <div class="compositional">
+      <!-- Left Image Section with Audio Icons -->
+      <div class="image">
+          <div class="video_to_video_small_header single_image">60s Reference Video + Unseen Target Speech</div>
+          <img id="si2vmainimage" src="assets/ref_video.png" alt="Reference Image">
+  
+          <!-- Audio icons beneath the left image, with onclick events to switch the video on the right -->
+          <div class="thumbnails single_image">
+              <div class="thumbnail thumbnail0">
+                  <img class="thumbnail_img" src="assets/audio_icon_1.png" onclick="switchVideo('assets/audio_0_retri_0.webm')">
+              </div>
+              <div class="thumbnail thumbnail1">
+                  <img class="thumbnail_img" src="assets/audio_icon_3.png" onclick="switchVideo('assets/audio_7_retri_0.webm')">
+              </div>
+              <div class="thumbnail thumbnail2">
+                  <img class="thumbnail_img" src="assets/audio_icon_2.png" onclick="switchVideo('assets/audio_3_retri_0.webm')">
+              </div>
+              <div class="thumbnail thumbnail3">
+                  <img class="thumbnail_img" src="assets/audio_icon_5.png" onclick="switchVideo('assets/audio_8_retri_0.webm')">
+              </div>
+              <div class="thumbnail thumbnail4">
+                  <img class="thumbnail_img" src="assets/audio_icon_4.png" onclick="switchVideo('assets/audio_5_retri_0.webm')">
+              </div>
+          </div>
+      </div>
+  
+      <!-- Right Video Section -->
+      <div class="image i2vmainvideo">
+          <div class="video_to_video_small_header">Co-Speech Gesture Video Generated from TANGO</div>
+  
+          <!-- Video element with an ID to be switched -->
+          <video class="i2vmainvideo" id="compositional_animals_vid" autoplay loop muted playsinline>
+              <source id="videoSource" src="assets/audio_0_retri_0.webm" type="video/webm">
+              Your browser does not support the video tag.
+          </video>
+  
+          <div class="center-controls">
+              <button onclick="toggleAudio('compositional_animals_vid')" class="audio-btn">🎧</button>
+          </div>
+      </div>
+  </div>
+  
+
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <div class="columns is-centered">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script defer src="./assets/js/fontawesome.all.min.js"></script>
+  <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/jquery.event.move.js"></script>
+  <script>
+    function toggleAudio(videoId) {
+      var video = document.getElementById(videoId);
+      if (video.muted) {
+        video.muted = false;
+        document.querySelector(`#${videoId} + .audio-control .audio-btn`).textContent = '🔊';
+      } else {
+        video.muted = true;
+        document.querySelector(`#${videoId} + .audio-control .audio-btn`).textContent = '🔇';
+      }
+    }
+    function switchVideo(source) {
+    var video = document.getElementById('compositional_animals_vid');
+    var videoSource = document.getElementById('videoSource');
+
+    // Change the video source
+    videoSource.src = source;
+
+    // Load the new video
+    video.load();
+}
+
+function toggleAudio(videoId) {
+    var video = document.getElementById(videoId);
+    if (video.muted) {
+        video.muted = false;
+        document.querySelector(`#${videoId} + .audio-control .audio-btn`).textContent = '🔊';
+    } else {
+        video.muted = true;
+        document.querySelector(`#${videoId} + .audio-control .audio-btn`).textContent = '🔇';
+    }
+}
+  </script>
+  
+</body>
+
+</html>
