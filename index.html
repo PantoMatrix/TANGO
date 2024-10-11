@@ -20,7 +20,45 @@
   <link rel="stylesheet" href="./assets/css/twentytwenty.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="icon" href="./assets/pac_man.svg">
-
+  <style>
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* Keeps 5 videos per row */
+      gap: 10px; /* Control the gap between videos */
+      justify-content: center; /* Centers the grid content */
+      margin: 0 50px; /* Default margin for small screen */
+    }
+  
+    @media (min-width: 1200px) {
+      .video-grid {
+        margin: 0 150px; /* Increase margin as the screen size increases */
+      }
+    }
+  
+    @media (min-width: 1600px) {
+      .video-grid {
+        margin: 0 200px; /* Larger margin for bigger screens */
+      }
+    }
+  
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .video-item video {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .caption {
+      text-align: center;
+      margin-top: 5px;
+    }
+  </style>
+  
+  
   <style>
     .container {
       width: 100%;
@@ -192,13 +230,13 @@
                 <span class="link-block">
                   <a href="https://huggingface.co/spaces/H-Liu1997/TANGO" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
-                    <span>🤗&nbsp;Gradio</span>
+                    <span>🤗&nbsp;Huggingface Space (Try it!)</span>
                   </a>
                 </span>
 
                 <!-- arXiv Link. -->
                 <span class="link-block">
-                  <a href="" target="_blank"
+                  <a href="https://arxiv.org/abs/2410.04221" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -209,7 +247,7 @@
 
                 <!-- Video Link. -->
                 <span class="link-block">
-                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://youtu.be/xuhD_-tMH1w" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-youtube"></i>
                     </span>
@@ -229,7 +267,7 @@
 
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/CyberAgentAILab/TANGO" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -244,6 +282,81 @@
       </div>
     </div>
   </section>
+  
+  <!-- TODO: show ten videos in two rows with autoplay and sound on click -->
+  <div class="video-grid">
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo0.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 0</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 1</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 2</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 3</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo4.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 4</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo5.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 5</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo6.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 6</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo7.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 7</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo8.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 8</p>
+    </div>
+    <div class="video-item">
+      <video class="demo-video" autoplay muted loop playsinline>
+        <source src="assets/demo9.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="caption">Video 9</p>
+    </div>
+  </div>
+
 
   <!-- Include the missing section -->
   <div class="white image_to_video">
@@ -252,13 +365,7 @@
         <div class="tab_text">Show-Oliver</div>
         <div class="separator"></div>
       </div>
-
-      <div class="tab tabimage pair_image">
-        <div class="tab_text">Youtube Video</div>
-        <div class="separator"></div>
-      </div>
     </div>
-
     <div class="compositional">
       <!-- Left Image Section with Audio Icons -->
       <div class="image">
@@ -303,7 +410,20 @@
   
 
 
-  </div>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <!-- <h2 class="title is-3">Video</h2> -->
+            <div class="publication-video">
+              <iframe src="https://www.youtube.com/embed/xuhD_-tMH1w?si=GSE--uTFbBdaPVT5"
+                      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -324,6 +444,20 @@
   <script src="./assets/js/bulma-slider.min.js"></script>
   <script src="./assets/js/index.js"></script>
   <script src="./assets/js/jquery.event.move.js"></script>
+  <script>
+    // Add event listeners to each video
+    document.querySelectorAll('.demo-video').forEach(function(video) {
+      video.addEventListener('click', function() {
+        // Toggle mute on video click
+        if (video.muted) {
+          video.muted = false;
+          video.play();
+        } else {
+          video.muted = true;
+        }
+      });
+    });
+  </script>
   <script>
     function toggleAudio(videoId) {
       var video = document.getElementById(videoId);
